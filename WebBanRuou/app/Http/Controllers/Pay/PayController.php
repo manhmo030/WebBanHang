@@ -23,15 +23,21 @@ class PayController extends Controller
     public function __construct(ThanhToan $pay, ThongTinNhanHang $ttnh, GioHang $cart)
     {
         $this->pay = $pay;
-        $this->ttnh=$ttnh;
-        $this->cart=$cart;
+        $this->ttnh = $ttnh;
+        $this->cart = $cart;
     }
 
     public function showFormPurchase()
     {
         $makhachhang = auth()->user()->makhachhang;
         $cartdata = $this->cart->showCart($makhachhang);
-        $address_default = $this->ttnh->thongtinnhanhangByUserId($makhachhang);
+        $address_default = ThongTinNhanHang::where('makhachhang', $makhachhang)
+            ->where('trangthai', 'default')
+            ->join('tbl_xaphuongthitran', 'tbl_xaphuongthitran.xaid', '=', 'tbl_thongtinnhanhang.xaid')
+            ->join('tbl_quanhuyen', 'tbl_quanhuyen.maqh', '=', 'tbl_xaphuongthitran.maqh')
+            ->join('tbl_tinhthanhpho', 'tbl_tinhthanhpho.matp', '=', 'tbl_quanhuyen.matp')
+            ->select('tbl_thongtinnhanhang.*', 'tbl_xaphuongthitran.*', 'tbl_quanhuyen.*', 'tbl_tinhthanhpho.*')
+            ->first();
         return view('User.cart.purchase', compact('cartdata', 'address_default'));
     }
 

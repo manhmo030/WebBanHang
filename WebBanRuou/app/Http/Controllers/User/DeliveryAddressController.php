@@ -20,6 +20,7 @@ class DeliveryAddressController extends Controller
     {
         $makhachhang = auth()->user()->makhachhang;
         $address = $this->ttnh->thongtinnhanhangByUserId($makhachhang);
+        //sdd($address);
         return view('User.deliveryAddress.listDeliveryAddress', compact('address'));
     }
 

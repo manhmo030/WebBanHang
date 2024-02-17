@@ -32,7 +32,7 @@ class ThongTinNhanHang extends Model
             ->join('tbl_quanhuyen', 'tbl_quanhuyen.maqh', '=', 'tbl_xaphuongthitran.maqh')
             ->join('tbl_tinhthanhpho', 'tbl_tinhthanhpho.matp', '=', 'tbl_quanhuyen.matp')
             ->select('tbl_thongtinnhanhang.*', 'tbl_xaphuongthitran.*', 'tbl_quanhuyen.*', 'tbl_tinhthanhpho.*')
-            ->first();
+            ->get();
         return $ttnh;
     }
 }
