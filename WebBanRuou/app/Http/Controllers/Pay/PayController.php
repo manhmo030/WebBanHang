@@ -43,15 +43,15 @@ class PayController extends Controller
 
     public function purchase(Request $request)
     {
-        $data = $request->all();
+        $total = $request->total;
+        $mattnh = $request->checkAddress;
         $makhachhang = auth()->user()->makhachhang;
-        $donhang = $this->pay->addDonHang($makhachhang);
+        $donhang = $this->pay->addDonHang($makhachhang, $mattnh);
         $madonhang = $donhang->madonhang;
-        // $giohang = GioHang::where('makhachhang', $makhachhang)->first();  // cách1
-        // $ctgiohang = $giohang->chiTietGioHangWithSanPham;
         $this->pay->addChiTietDonHang($makhachhang, $madonhang);
-        $this->pay->addNhanHan($data, $madonhang);
+        $this->pay->addThanhToan($madonhang, $total);
         $this->pay->deleteChiTietGioHang($makhachhang);
+
         return redirect('user/waitingPurchase');
     }
 

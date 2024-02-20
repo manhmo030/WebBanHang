@@ -30,6 +30,13 @@
     <!-- Template Stylesheet -->
     <link href="{{ asset('assetAdmin/css/style.css') }}" rel="stylesheet">
 </head>
+<style>
+    p.error-message {
+        color: #dc3545;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+</style>
 
 <body>
     <div class="container-xxl position-relative bg-white d-flex p-0">
@@ -66,23 +73,31 @@
                             <div class="form-floating mb-3">
                                 <input type="text" name="tendangnhap" class="form-control" id="floatingInput"
                                     placeholder="name@example.com">
-                                <label for="floatingInput">Email address</label>
+                                <label for="floatingInput">Email address: admin1</label>
+                                @if ($errors->has('tendangnhap'))
+                                    <p class="error-message">{{ $errors->first('tendangnhap') }}</p>
+                                @endif
+
                             </div>
                             <div class="form-floating mb-4">
                                 <input type="password" name="password" class="form-control" id="floatingPassword"
                                     placeholder="Password">
-                                <label for="floatingPassword">Password</label>
+                                <label for="floatingPassword">Password: 123</label>
+                                @if ($errors->has('password'))
+                                    <p class="error-message">{{ $errors->first('password') }}</p>
+                                @endif
                             </div>
                             <div class="d-flex align-items-center justify-content-between mb-4">
-                                <div class="form-check">
+                                {{-- <div class="form-check">
                                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
                                     <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                                </div>
-                                <a href="">Forgot Password</a>
+                                </div> --}}
+                                {{-- <a href="">Forgot Password</a> --}}
                             </div>
                             <button name="login" type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign
                                 In</button>
-                            <p class="text-center mb-0">Don't have an Account? <a href="{{ URL::to('/admin/register') }}">Sign Up</a></p>
+                            <p class="text-center mb-0">Don't have an Account? <a
+                                    href="{{ URL::to('/admin/register') }}">Sign Up</a></p>
                         </form>
                     </div>
                 </div>

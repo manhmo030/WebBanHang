@@ -4,9 +4,7 @@
         <div class="bg-light text-center rounded p-4">
             <div class="d-flex align-items-center justify-content-between mb-4">
                 <h6 class="mb-0">Danh Sách Phí Vận Chuyển 🌻 </h6>
-                <div class="d-flex align-items-center justify-content-between mb-4">
-                    <a class="btn btn-sm btn-primary" href="{{ URL::to('/admin/add-feeship') }}">Thêm Mới</a>
-                </div>
+
             </div>
             <div class="table-responsive">
                 {{-- @if (session('success'))

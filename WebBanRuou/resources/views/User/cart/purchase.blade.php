@@ -149,6 +149,7 @@
                                     <span>
                                         ${{ $total = $subtotal - $coupon + $transportFee }}
                                     </span>
+                                    <input type="hidden" name="total" value="{{ $total }}">
                                 </div>
 
                                 <div class="checkout__input__checkbox">

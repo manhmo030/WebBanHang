@@ -25,13 +25,18 @@ class AuthController extends Controller
 
     public function loginAdmin(Request $request)
     {
+        $request->validate([
+            'tendangnhap' => 'required',
+            'password' => 'required'
+        ]);
+
         $credentials = $request->only('tendangnhap', 'password');
         $result = Auth::guard('admin')->attempt($credentials);
 
         if ($result) {
             $admin = Auth::guard('admin')->user();
-            Session::put('hoten', $admin->hoten);
-            Session::put('anh', $admin->anh);
+            Session::put('hotenadmin', $admin->hoten);
+            Session::put('anhadmin', $admin->anh);
             Session::put('maadmin', $admin->maadmin);
             return redirect('/admin/show-dash-board');
         } else {
@@ -43,8 +48,8 @@ class AuthController extends Controller
 
     public function logout()
     {
-        Session::put('hoten', null);
-        Session::put('anh', null);
+        Session::put('hotenadmin', null);
+        Session::put('anhadmin', null);
         Session::put('maadmin', null);
         return view('Auth.loginAdmin');
     }
@@ -56,6 +61,12 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
+        $request->validate([
+            'tendangnhap' => 'required|email',
+            'password' => 'required|min:3',
+            'hoten' => 'required'
+        ]);
+
         $admin = Admin::create([
             'tendangnhap' => $request->input('tendangnhap'),
             'password' => bcrypt($request->input('password')),

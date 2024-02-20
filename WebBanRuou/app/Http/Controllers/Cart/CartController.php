@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
-    private $cart;//
+    private $cart; //
 
     function __construct(GioHang $cart)
     {
@@ -71,15 +71,21 @@ class CartController extends Controller
     {
         if ($request->has('cart_items')) {
             $cartItems = $request->input('cart_items');
+
             foreach ($cartItems as $mactgiohang => $quantity) {
                 $ctgiohang = ChiTietGioHang::where('mactgiohang', $mactgiohang)->first();
                 $total = $ctgiohang->gia * $quantity;
                 ChiTietGioHang::where('mactgiohang', $mactgiohang)->update(['soluong' => $quantity, 'tongcong' => $total]);
+                $updatedCartItems[] = [
+                    'mactgiohang' => $mactgiohang,
+                    'total' => $total
+                ];
             }
 
             $makhachhang = auth()->user()->makhachhang;
             $subTotal = $this->cart->allTotal($makhachhang);
-            return response()->json(['message' => 'Cập nhật giỏ hàng thành công', 'subTotal' => $subTotal]);
+
+            return response()->json(['message' => 'Cập nhật giỏ hàng thành công', 'subTotal' => $subTotal, 'updatedCartItems' => $updatedCartItems]);
         } else {
             return response()->json(['message' => 'không lấy được cartItems']);
         }

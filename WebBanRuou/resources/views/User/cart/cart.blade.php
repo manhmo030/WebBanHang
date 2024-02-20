@@ -61,7 +61,7 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="shoping__cart__total">
+                                            <td id="total-{{ $item->mactgiohang }}" class="shoping__cart__total">
                                                 ${{ $item->tongcong }}
                                             </td>
                                             <td> {{-- Xóa --}}

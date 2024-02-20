@@ -22,6 +22,7 @@ class OrderController extends Controller
         $order = DonHang::where('magiohang', $magiohang)
             ->orderBy('ngaydathang', 'DESC')
             ->with('chiTietDonHangWithSanPham')->get();
+
         if ($order->isNotEmpty()) {
             return view('User.cart.order', compact('order'));
         } else {

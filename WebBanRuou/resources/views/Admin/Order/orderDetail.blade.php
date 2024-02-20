@@ -12,17 +12,17 @@
                                 <th scope="col">Email</th>
                                 <th scope="col">Sdt</th>
                                 <th scope="col">Địa chỉ</th>
-                                <th>Ghi chú</th>
+
 
                             </tr>
                         </thead>
                         <tbody>
                             <tr id="danhsach">
-                                <td>{{ $nhanHang->ten }}</td>
+                                <td>{{ $nhanHang->hoten }}</td>
                                 <td>{{ $nhanHang->email }}</td>
                                 <td>{{ $nhanHang->sdt }}</td>
-                                <td>{{ $nhanHang->diachi }}</td>
-                                <td>{{ $nhanHang->ghichu }}</td>
+                                <td>{{ $nhanHang->tentinhthanhpho }} - {{ $nhanHang->tenquanhuyen }} - {{ $nhanHang->tenxaphuongthitran }}</td>
+
                             </tr>
                         </tbody>
                     </table>

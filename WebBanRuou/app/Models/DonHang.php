@@ -12,7 +12,7 @@ class DonHang extends Model
     protected $table = 'tbl_donhang';
     protected $primaryKey = 'madonhang';
     public $timestamps = false;
-    protected $fillable = ['magiohang', 'ngaydathang', 'tongtien', 'trangthai'];
+    protected $fillable = ['magiohang', 'ngaydathang', 'mattnh', 'tongtien', 'trangthai'];
 
     public function chiTietDonHang()
     {

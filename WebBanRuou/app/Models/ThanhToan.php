@@ -14,7 +14,7 @@ class ThanhToan extends Model
     public $timestamps = false;
     protected $fillable = ['madonhang', 'ngaythanhtoan', 'tongtien', 'phuongthucthanhtoan'];
 
-    public function addDonHang($makhachhang)
+    public function addDonHang($makhachhang, $mattnh)
     {
         $cart = new GioHang();
         $magiohang = $cart->getMaGioHang($makhachhang);
@@ -22,6 +22,7 @@ class ThanhToan extends Model
         $donhang = DonHang::create([
             'magiohang' => $magiohang,
             'ngaydathang' => Carbon::now(),
+            'mattnh' => $mattnh,
             'tongtien' => $tongtien,
             'trangthai' => 'Đang chờ xử lý'
         ]);
@@ -31,6 +32,8 @@ class ThanhToan extends Model
     public function addChiTietDonHang($makhachhang, $madonhang)
     {
         $cart = new GioHang();
+        // $giohang = GioHang::where('makhachhang', $makhachhang)->first();  // cách1
+        // $ctgiohang = $giohang->chiTietGioHangWithSanPham;
         $ctgh = $cart->getChiTietGioHang($makhachhang);  //cách 2
         foreach ($ctgh as $item) {
             ChiTietDonHang::create([
@@ -43,25 +46,12 @@ class ThanhToan extends Model
         return $cart;
     }
 
-    public function addNhanHan($data, $madonhang)
-    {
-        $nhanHang = NhanHang::create([
-            'madonhang' => $madonhang,
-            'ten' => $data['name'],
-            'email' => $data['email'],
-            'sdt' => $data['sdt'],
-            'diachi' => $data['diachi'],
-            'ghichu' => $data['ghichu']
-        ]);
-        return $nhanHang;
-    }
-
-    public function addThanhToan($makhachhang, $madonhang)
+    public function addThanhToan($madonhang, $total)
     {
         $thanhToan = self::create([
             'madonhang' => $madonhang,
             'ngaythanhtoan' => Carbon::now(),
-            'tongtien' => $this->cart->allTotal($makhachhang),
+            'tongtien' => $total,
             'phuongthucthanhtoan' => 'Thanh Toán Khi Nhận Hàng'
         ]);
         return $thanhToan;

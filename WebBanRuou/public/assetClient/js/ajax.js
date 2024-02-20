@@ -67,6 +67,7 @@ $(document).ready(function () {
             },
             success: function (response) {
                 // alert(response.message);
+                updatedCartItems(response.updatedCartItems);
                 updateSubTotal(response.subTotal);
             },
             error: function (error) {
@@ -77,6 +78,18 @@ $(document).ready(function () {
 });
 
 function updateSubTotal(newSubTotal) {
-    var subTotalElement = document.getElementById('subTotal');
-    subTotalElement.innerHTML = '$' + newSubTotal;
+    $('#subTotal').text(newSubTotal);  // cách dưới cũng đc
+    // var subTotalElement = document.getElementById('subTotal');
+    // subTotalElement.innerHTML = '$' + newSubTotal;
+}
+
+function updatedCartItems(updatedCartItems) {
+    updatedCartItems.forEach(function (cartItem) {
+        // Lấy thông tin cần thiết từ mục giỏ hàng
+        var cartItemId = cartItem.mactgiohang;
+        var total = cartItem.total;
+
+        // Cập nhật thông tin của mục giỏ hàng trên giao diện người dùng
+        $('#total-' + cartItemId).text(total);
+    });
 }
