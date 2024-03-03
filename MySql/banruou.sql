@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 03, 2024 at 08:56 PM
+-- Generation Time: Feb 22, 2024 at 03:36 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -66,10 +66,19 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `password_reset_tokens` (
-  `email` varchar(255) NOT NULL,
+  `id` int(11) NOT NULL,
   `token` varchar(255) NOT NULL,
+  `email` varchar(100) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `password_reset_tokens`
+--
+
+INSERT INTO `password_reset_tokens` (`id`, `token`, `email`, `created_at`) VALUES
+(1, 'IMgbjlviXb0CRbHkUNcWUaDp3VXYi2nsnVHPumbRcFSOX1BVMA', 'langx31081@gmail.com', NULL),
+(2, 'VUJIoCFdmWatnZBIXhJnelyt7RhapXqPX5BaJzsExfuieXW6IW', 'langx31081@gmail.com', NULL);
 
 -- --------------------------------------------------------
 
@@ -114,8 +123,9 @@ CREATE TABLE `tbl_admin` (
 
 INSERT INTO `tbl_admin` (`maadmin`, `tendangnhap`, `password`, `hoten`, `nickname`, `sdt`, `diachi`, `email`, `anh`) VALUES
 (5, 'admin3', '$2y$12$WqUh8UmVUjke.nMpRA9QRuBsDCJXoYrlxNj0DZvbz9E/U4t0tnxCy', 'Quang Thắng', NULL, NULL, NULL, NULL, 'thangg.png'),
-(9, 'admin1', '$2y$12$d0i14LQ6NuB/gLmTAk0Syu17LfG4h9qTSePiwj5kYcytBQ8.5U6rm', 'hồng nè', NULL, NULL, NULL, NULL, 'hong.jpg'),
-(10, 'x', '$2y$12$Y71ogT9G9avcHI/2cnlDQ./ILbvzRrX2TVUIqYBfhjlJXqpjLtKCS', '1', NULL, NULL, NULL, NULL, NULL);
+(9, 'admin1', '$2y$12$d0i14LQ6NuB/gLmTAk0Syu17LfG4h9qTSePiwj5kYcytBQ8.5U6rm', 'hồng', NULL, NULL, NULL, NULL, 'hong.jpg'),
+(10, 'x', '$2y$12$Y71ogT9G9avcHI/2cnlDQ./ILbvzRrX2TVUIqYBfhjlJXqpjLtKCS', '1', NULL, NULL, NULL, NULL, NULL),
+(12, 'hh@gmail.com', '$2y$12$/eXizvs7uVJEsarM/ocCEe5GEOFj9WPIVtQssfwkKi6e.burWIMgi', 'aa', NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -178,7 +188,6 @@ CREATE TABLE `tbl_ctdonhang` (
   `mactdonhang` int(11) NOT NULL,
   `madonhang` int(11) NOT NULL,
   `masp` int(11) NOT NULL,
-  `mattnh` int(11) NOT NULL,
   `soluong` int(11) NOT NULL,
   `tongtien` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -187,19 +196,25 @@ CREATE TABLE `tbl_ctdonhang` (
 -- Dumping data for table `tbl_ctdonhang`
 --
 
-INSERT INTO `tbl_ctdonhang` (`mactdonhang`, `madonhang`, `masp`, `mattnh`, `soluong`, `tongtien`) VALUES
-(12, 19, 78, 1, 1, 2500000),
-(13, 20, 80, 1, 3, 10500000),
-(14, 20, 100, 1, 1, 26000000),
-(15, 21, 1, 1, 5, 50000000),
-(16, 21, 60, 1, 1, 2000000),
-(17, 21, 80, 1, 2, 7000000),
-(18, 21, 79, 1, 1, 3000000),
-(19, 22, 86, 1, 1, 3500000),
-(20, 23, 89, 1, 1, 2000000),
-(21, 24, 2, 1, 1, 9000000),
-(22, 24, 78, 1, 1, 2500000),
-(23, 24, 83, 1, 1, 2000000);
+INSERT INTO `tbl_ctdonhang` (`mactdonhang`, `madonhang`, `masp`, `soluong`, `tongtien`) VALUES
+(12, 19, 78, 1, 2500000),
+(13, 20, 80, 3, 10500000),
+(14, 20, 100, 1, 26000000),
+(15, 21, 1, 5, 50000000),
+(16, 21, 60, 1, 2000000),
+(17, 21, 80, 2, 7000000),
+(18, 21, 79, 1, 3000000),
+(19, 22, 86, 1, 3500000),
+(20, 23, 89, 1, 2000000),
+(21, 24, 2, 1, 9000000),
+(22, 24, 78, 1, 2500000),
+(23, 24, 83, 1, 2000000),
+(24, 26, 60, 5, 10000000),
+(25, 27, 1, 1, 10000000),
+(26, 28, 81, 1, 4000000),
+(27, 29, 79, 4, 12000000),
+(28, 30, 99, 2, 132000000),
+(29, 30, 1, 1, 10000000);
 
 -- --------------------------------------------------------
 
@@ -222,9 +237,8 @@ CREATE TABLE `tbl_ctgiohang` (
 --
 
 INSERT INTO `tbl_ctgiohang` (`mactgiohang`, `magiohang`, `masp`, `soluong`, `gia`, `tongcong`, `trangthai`) VALUES
-(18, 6, 99, 1, 66000000, 66000000, NULL),
-(39, 5, 1, 2, 10000000, 20000000, NULL),
-(43, 5, 60, 6, 2000000, 12000000, NULL);
+(66, 11, 80, 2, 3500000, 7000000, NULL),
+(69, 6, 233, 3, 20, 60, NULL);
 
 -- --------------------------------------------------------
 
@@ -255,7 +269,6 @@ INSERT INTO `tbl_ctsanpham` (`mactsp`, `masp`, `soluong`, `baoquan`, `huongvi`, 
 (7, 81, 1000, 'bảo quản nơi khô ráo, thoáng mát, tránh ánh nắng mặt trời', 'Syrah thường mang đến hương vị của trái cây đen như anh đào, mâm xôi và việt quất, kèm theo nốt hươn', 2),
 (8, 82, 1000, 'bảo quản nơi khô ráo, thoáng mát, tránh ánh nắng mặt trời', 'Syrah thường mang đến hương vị của trái cây đen như anh đào, mâm xôi và việt quất, kèm theo nốt hươn', 2),
 (9, 83, 1000, 'bảo quản nơi khô ráo, thoáng mát, tránh ánh nắng mặt trời', 'Syrah thường mang đến hương vị của trái cây đen như anh đào, mâm xôi và việt quất, kèm theo nốt hươn', 2),
-(10, 84, 1000, 'bảo quản nơi khô ráo, thoáng mát, tránh ánh nắng mặt trời', 'Syrah thường mang đến hương vị của trái cây đen như anh đào, mâm xôi và việt quất, kèm theo nốt hươn', 2),
 (11, 85, 1000, 'bảo quản nơi khô ráo, thoáng mát, tránh ánh nắng mặt trời', 'Syrah thường mang đến hương vị của trái cây đen như anh đào, mâm xôi và việt quất, kèm theo nốt hươn', 2),
 (12, 86, 1000, 'bảo quản nơi khô ráo, thoáng mát, tránh ánh nắng mặt trời', 'Syrah thường mang đến hương vị của trái cây đen như anh đào, mâm xôi và việt quất, kèm theo nốt hươn', 2),
 (13, 87, 1000, 'bảo quản nơi khô ráo, thoáng mát, tránh ánh nắng mặt trời', 'Syrah thường mang đến hương vị của trái cây đen như anh đào, mâm xôi và việt quất, kèm theo nốt hươn', 2),
@@ -281,7 +294,8 @@ INSERT INTO `tbl_ctsanpham` (`mactsp`, `masp`, `soluong`, `baoquan`, `huongvi`, 
 (42, 106, 1000, 'bảo quản nơi khô ráo, thoáng mát, tránh ánh nắng mặt trời', 'Syrah thường mang đến hương vị của trái cây đen như anh đào, mâm xôi và việt quất, kèm theo nốt hươn', 2),
 (43, 107, 1000, 'bảo quản nơi khô ráo, thoáng mát, tránh ánh nắng mặt trời', 'Syrah thường mang đến hương vị của trái cây đen như anh đào, mâm xôi và việt quất, kèm theo nốt hươn', 2),
 (44, 108, 1000, 'bảo quản nơi khô ráo, thoáng mát, tránh ánh nắng mặt trời', 'Syrah thường mang đến hương vị của trái cây đen như anh đào, mâm xôi và việt quất, kèm theo nốt hươn', 2),
-(45, 109, 1000, 'bảo quản nơi khô ráo, thoáng mát, tránh ánh nắng mặt trời', 'Syrah thường mang đến hương vị của trái cây đen như anh đào, mâm xôi và việt quất, kèm theo nốt hươn', 2);
+(45, 109, 1000, 'bảo quản nơi khô ráo, thoáng mát, tránh ánh nắng mặt trời', 'Syrah thường mang đến hương vị của trái cây đen như anh đào, mâm xôi và việt quất, kèm theo nốt hươn', 2),
+(59, 233, 30, 'sss', 'sss', 1);
 
 -- --------------------------------------------------------
 
@@ -306,6 +320,7 @@ CREATE TABLE `tbl_donhang` (
   `madonhang` int(11) NOT NULL,
   `magiohang` int(11) NOT NULL,
   `ngaydathang` date NOT NULL,
+  `mattnh` int(100) NOT NULL,
   `tongtien` double NOT NULL,
   `trangthai` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -314,13 +329,18 @@ CREATE TABLE `tbl_donhang` (
 -- Dumping data for table `tbl_donhang`
 --
 
-INSERT INTO `tbl_donhang` (`madonhang`, `magiohang`, `ngaydathang`, `tongtien`, `trangthai`) VALUES
-(19, 5, '2024-01-22', 2500000, 'Đơn hàng bị hủy'),
-(20, 5, '2024-01-22', 36500000, 'Đang Vận Chuyển'),
-(21, 6, '2024-01-23', 62000000, 'Đang Vận Chuyển'),
-(22, 6, '2024-01-23', 3500000, 'Đang Vận Chuyển'),
-(23, 5, '2024-01-23', 2000000, 'Đang Vận Chuyển'),
-(24, 5, '2024-01-23', 13500000, 'Đang chờ xử lý');
+INSERT INTO `tbl_donhang` (`madonhang`, `magiohang`, `ngaydathang`, `mattnh`, `tongtien`, `trangthai`) VALUES
+(19, 5, '2024-01-22', 1, 2500000, 'Đơn hàng bị hủy'),
+(20, 5, '2024-01-22', 1, 36500000, 'Đang Vận Chuyển'),
+(21, 6, '2024-01-23', 1, 62000000, 'Đang Vận Chuyển'),
+(22, 6, '2024-01-23', 1, 3500000, 'Đang Vận Chuyển'),
+(23, 5, '2024-01-23', 1, 2000000, 'Đang Vận Chuyển'),
+(24, 5, '2024-01-23', 1, 13500000, 'Đang chờ xử lý'),
+(26, 5, '2024-02-20', 1, 10000000, 'Đơn hàng bị hủy'),
+(27, 5, '2024-02-20', 1, 10000000, 'Đang Vận Chuyển'),
+(28, 5, '2024-02-20', 3, 4000000, 'Đang chờ xử lý'),
+(29, 5, '2024-02-20', 2, 12000000, 'Đang chờ xử lý'),
+(30, 6, '2024-02-22', 5, 142000000, 'Đang chờ xử lý');
 
 -- --------------------------------------------------------
 
@@ -366,7 +386,9 @@ CREATE TABLE `tbl_giohang` (
 
 INSERT INTO `tbl_giohang` (`magiohang`, `makhachhang`, `ngaytao`) VALUES
 (5, 4, '2024-01-11'),
-(6, 5, '2024-01-11');
+(6, 5, '2024-01-11'),
+(11, 15, '2024-02-21'),
+(12, 16, '2024-02-22');
 
 -- --------------------------------------------------------
 
@@ -1200,7 +1222,7 @@ CREATE TABLE `tbl_sanpham` (
 --
 
 INSERT INTO `tbl_sanpham` (`masp`, `tensp`, `maloai`, `machatlieu`, `dongianhap`, `dongiaban`, `mancc`, `anh`, `ghichu`) VALUES
-(1, 'Single Malt Irish Whisky', 4, 3, 5000000, 10000000, 9, 'a7.jpg', 'bbbcvk'),
+(1, 'Single Malt Irish Whiskyhhhh', 4, 3, 5000000, 10000000, 9, 'a7.jpg', 'bbbcvk'),
 (2, 'Rượu rum màu đen', 2, 2, 4000000, 9000000, 1, 'rumden.jpg', 'o ze'),
 (60, 'Whisky 1', 1, 1, 1000000, 2000000, 1, 'a1.jpg', 'ngon lắm nha'),
 (78, 'Whisky 2', 1, 1, 1500000, 2500000, 1, 'a2.jpg', 'ngon lắm nha 2'),
@@ -1209,7 +1231,6 @@ INSERT INTO `tbl_sanpham` (`masp`, `tensp`, `maloai`, `machatlieu`, `dongianhap`
 (81, 'Whisky 5', 1, 1, 3000000, 4000000, 1, 'a5.jpg', 'ngon lắm nha 5'),
 (82, 'Whisky 6', 1, 1, 3500000, 4500000, 1, 'a6.jpg', 'ngon lắm nha 6'),
 (83, 'Rum 1', 2, 2, 1000000, 2000000, 1, 'a7.jpg', 'ngon lắm nha 1'),
-(84, 'Rum 2', 2, 2, 1500000, 2500000, 1, 'a8.jpg', 'ngon lắm nha 2'),
 (85, 'Rum 3', 2, 2, 2000000, 3000000, 1, 'a9.jpg', 'ngon lắm nha 3'),
 (86, 'Rum 4', 2, 2, 2500000, 3500000, 1, 'a10.jpg', 'ngon lắm nha 4'),
 (87, 'Rum 5', 2, 2, 3000000, 4000000, 1, 'a11.jpg', 'ngon lắm nha 5'),
@@ -1234,7 +1255,8 @@ INSERT INTO `tbl_sanpham` (`masp`, `tensp`, `maloai`, `machatlieu`, `dongianhap`
 (106, 'Tequila 2', 5, 2, 1334000, 9100000, 1, 'a25.jpg', 'verygood'),
 (107, 'Tequila 3', 5, 2, 1434000, 9200000, 1, 'a26.jpg', 'verygood'),
 (108, 'Tequila 4', 5, 2, 1534000, 9300000, 1, 'a27.jpg', 'verygood'),
-(109, 'Tequila 5', 5, 2, 1634000, 9400000, 1, 'a28.jpg', 'verygood');
+(109, 'Tequila 5', 5, 2, 1634000, 9400000, 1, 'a28.jpg', 'verygood'),
+(233, 'ruou sam', 1, 1, 10, 20, 1, 'a8.jpg', 'vvv');
 
 -- --------------------------------------------------------
 
@@ -1257,7 +1279,11 @@ CREATE TABLE `tbl_thanhtoan` (
 INSERT INTO `tbl_thanhtoan` (`mathanhtoan`, `madonhang`, `ngaythanhtoan`, `tongtien`, `phuongthucthanhtoan`) VALUES
 (4, 19, '2024-01-22', 2500000, 'Thanh Toán Khi Nhận Hàng'),
 (5, 20, '2024-01-22', 36500000, 'Thanh Toán Khi Nhận Hàng'),
-(6, 21, '2024-01-23', 62000000, 'Thanh Toán Khi Nhận Hàng');
+(6, 21, '2024-01-23', 62000000, 'Thanh Toán Khi Nhận Hàng'),
+(7, 27, '2024-02-20', 9050000, 'Thanh Toán Khi Nhận Hàng'),
+(8, 28, '2024-02-20', 4028000, 'Thanh Toán Khi Nhận Hàng'),
+(9, 29, '2024-02-20', 12026000, 'Thanh Toán Khi Nhận Hàng'),
+(10, 30, '2024-02-22', 142028000, 'Thanh Toán Khi Nhận Hàng');
 
 -- --------------------------------------------------------
 
@@ -1280,7 +1306,11 @@ CREATE TABLE `tbl_thongtinnhanhang` (
 --
 
 INSERT INTO `tbl_thongtinnhanhang` (`mattnh`, `hoten`, `sdt`, `email`, `xaid`, `makhachhang`, `trangthai`) VALUES
-(1, 'Hồng', '09099090', 'nguyenhong31081@gmail.com', 1, 4, 'default');
+(1, 'Hồng', '09099090', 'nguyenhong31081@gmail.com', 1, 4, 'default'),
+(2, 'Nguyễn Việt Hồng', '0372687318', 'nguyenhong31081@gmail.com', 7570, 4, 'notDefault'),
+(3, 'Nguyễn Việt Hồng', '0372687318', 'nguyenhong31081@gmail.com', 7387, 4, 'notDefault'),
+(4, 'Nguyễn Việt Hồng', '0372687318', 'nguyenhong31081@gmail.com', 1864, 5, 'default'),
+(5, 'Ali Abdul', '0372687318', 'nguyenhong31081@gmail.com', 8920, 5, 'notDefault');
 
 -- --------------------------------------------------------
 
@@ -1401,9 +1431,11 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`makhachhang`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `facebook_id`, `google_id`, `created_at`, `updated_at`) VALUES
-(4, 'hồng nài', 'user1', NULL, '$2y$12$eTNaahNNLPm9eBkTjAUyruZXecPdJk.7z4cB1rtuQdPS7zGKAe6pO', NULL, NULL, NULL, NULL, NULL),
+(4, 'hồng nài', 'user1', NULL, '$2y$12$z5fSU3K5Qo5bPTGiU4LF5.C7KxZ58kZQdzk1/Obu01V6EQ8v/RhsS', NULL, NULL, NULL, NULL, NULL),
 (5, 'thắng', 'user3', NULL, '$2y$12$ZK4RK63g1GFvZzkhMHL8F.FUf0ZADNlDtQyGT4CYDZ3i1eF7xA1pu', NULL, NULL, NULL, NULL, NULL),
-(10, 'Hồng Nguyễn', 'nguyenhong31081@gmail.com', NULL, '$2y$12$ndBPqe4Y7wTPFX0qiAMZrucj9c9lclsHkIjKOP38iyKgD2EeaWG8O', NULL, NULL, '109853454481449121097', NULL, NULL);
+(10, 'Hồng Nguyễn', 'nguyenhong31081@gmail.com', NULL, '$2y$12$ndBPqe4Y7wTPFX0qiAMZrucj9c9lclsHkIjKOP38iyKgD2EeaWG8O', NULL, NULL, '109853454481449121097', NULL, NULL),
+(15, 'hong', 'langx31081@gmail.com', NULL, '$2y$12$diSQ8tunyib4G8Y89U/Nh.0xPU3xKn9Wjag5Az.nxqWXJjtMsW/6S', NULL, NULL, NULL, NULL, NULL),
+(16, 'sss', 'dd@gmail.com', NULL, '$2y$12$DfHyWqiu1I1SE.OnAq22c.qaqpOZQT7nIzS/vgA/3IvryW/upqkSG', NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1424,7 +1456,7 @@ CREATE TABLE `tbl_xaphuongthitran` (
 --
 
 INSERT INTO `tbl_xaphuongthitran` (`xaid`, `tenxaphuongthitran`, `type`, `phivanchuyen`, `maqh`) VALUES
-(1, 'Phường Phúc Xá', 'Phường', 5000, 1),
+(1, 'Phường Phúc Xá', 'Phường', 7000, 1),
 (4, 'Phường Trúc Bạch', 'Phường', 20000, 1),
 (6, 'Phường Vĩnh Phúc', 'Phường', 27000, 1),
 (7, 'Phường Cống Vị', 'Phường', 25000, 1),
@@ -12617,7 +12649,7 @@ ALTER TABLE `migrations`
 -- Indexes for table `password_reset_tokens`
 --
 ALTER TABLE `password_reset_tokens`
-  ADD PRIMARY KEY (`email`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `personal_access_tokens`
@@ -12661,8 +12693,7 @@ ALTER TABLE `tbl_chitiethdn`
 ALTER TABLE `tbl_ctdonhang`
   ADD PRIMARY KEY (`mactdonhang`),
   ADD KEY `FK_ctdonhang_donhang` (`madonhang`),
-  ADD KEY `FK_ctdonhang_sanpham` (`masp`),
-  ADD KEY `FK_ctdonhang_thongtinnhanhang` (`mattnh`);
+  ADD KEY `FK_ctdonhang_sanpham` (`masp`);
 
 --
 -- Indexes for table `tbl_ctgiohang`
@@ -12692,7 +12723,8 @@ ALTER TABLE `tbl_danhgia`
 --
 ALTER TABLE `tbl_donhang`
   ADD PRIMARY KEY (`madonhang`),
-  ADD KEY `FK_donhang_giohang` (`magiohang`);
+  ADD KEY `FK_donhang_giohang` (`magiohang`),
+  ADD KEY `FK_donhang_ttnh` (`mattnh`);
 
 --
 -- Indexes for table `tbl_giamgia`
@@ -12810,6 +12842,12 @@ ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `password_reset_tokens`
+--
+ALTER TABLE `password_reset_tokens`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
@@ -12819,7 +12857,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `tbl_admin`
 --
 ALTER TABLE `tbl_admin`
-  MODIFY `maadmin` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `maadmin` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tbl_chatlieu`
@@ -12837,19 +12875,19 @@ ALTER TABLE `tbl_chitiethdb`
 -- AUTO_INCREMENT for table `tbl_ctdonhang`
 --
 ALTER TABLE `tbl_ctdonhang`
-  MODIFY `mactdonhang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `mactdonhang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `tbl_ctgiohang`
 --
 ALTER TABLE `tbl_ctgiohang`
-  MODIFY `mactgiohang` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `mactgiohang` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT for table `tbl_ctsanpham`
 --
 ALTER TABLE `tbl_ctsanpham`
-  MODIFY `mactsp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `mactsp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `tbl_danhgia`
@@ -12861,19 +12899,19 @@ ALTER TABLE `tbl_danhgia`
 -- AUTO_INCREMENT for table `tbl_donhang`
 --
 ALTER TABLE `tbl_donhang`
-  MODIFY `madonhang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `madonhang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `tbl_giamgia`
 --
 ALTER TABLE `tbl_giamgia`
-  MODIFY `giamgia_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `giamgia_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `tbl_giohang`
 --
 ALTER TABLE `tbl_giohang`
-  MODIFY `magiohang` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `magiohang` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tbl_hdb`
@@ -12903,19 +12941,19 @@ ALTER TABLE `tbl_quanhuyen`
 -- AUTO_INCREMENT for table `tbl_sanpham`
 --
 ALTER TABLE `tbl_sanpham`
-  MODIFY `masp` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=230;
+  MODIFY `masp` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=234;
 
 --
 -- AUTO_INCREMENT for table `tbl_thanhtoan`
 --
 ALTER TABLE `tbl_thanhtoan`
-  MODIFY `mathanhtoan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `mathanhtoan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tbl_thongtinnhanhang`
 --
 ALTER TABLE `tbl_thongtinnhanhang`
-  MODIFY `mattnh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `mattnh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_tinhthanhpho`
@@ -12933,7 +12971,7 @@ ALTER TABLE `tbl_tinnhan`
 -- AUTO_INCREMENT for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `makhachhang` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `makhachhang` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `tbl_xaphuongthitran`
@@ -12964,8 +13002,7 @@ ALTER TABLE `tbl_chitiethdn`
 --
 ALTER TABLE `tbl_ctdonhang`
   ADD CONSTRAINT `FK_ctdonhang_donhang` FOREIGN KEY (`madonhang`) REFERENCES `tbl_donhang` (`madonhang`),
-  ADD CONSTRAINT `FK_ctdonhang_sanpham` FOREIGN KEY (`masp`) REFERENCES `tbl_sanpham` (`masp`),
-  ADD CONSTRAINT `FK_ctdonhang_thongtinnhanhang` FOREIGN KEY (`mattnh`) REFERENCES `tbl_thongtinnhanhang` (`mattnh`);
+  ADD CONSTRAINT `FK_ctdonhang_sanpham` FOREIGN KEY (`masp`) REFERENCES `tbl_sanpham` (`masp`);
 
 --
 -- Constraints for table `tbl_ctgiohang`
@@ -12991,7 +13028,8 @@ ALTER TABLE `tbl_danhgia`
 -- Constraints for table `tbl_donhang`
 --
 ALTER TABLE `tbl_donhang`
-  ADD CONSTRAINT `FK_donhang_giohang` FOREIGN KEY (`magiohang`) REFERENCES `tbl_giohang` (`magiohang`);
+  ADD CONSTRAINT `FK_donhang_giohang` FOREIGN KEY (`magiohang`) REFERENCES `tbl_giohang` (`magiohang`),
+  ADD CONSTRAINT `FK_donhang_ttnh` FOREIGN KEY (`mattnh`) REFERENCES `tbl_thongtinnhanhang` (`mattnh`);
 
 --
 -- Constraints for table `tbl_giohang`
