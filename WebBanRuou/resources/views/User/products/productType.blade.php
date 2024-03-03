@@ -29,8 +29,10 @@
                                 style="background-image: url(&quot;img/featured/feature-1.jpg&quot;);">
                                 <ul class="featured__item__pic__hover">
                                     <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                    <li><a href="{{ URL::to('/user/product-detail/' . $product->masp) }}"><i
+                                                class="fa-solid fa-circle-info"></i></a></li>
+                                    <li><a href="#" class="add-to-cart" data-product-id="{{ $product->masp }}">
+                                            <i class="fa fa-shopping-cart"></i></a></li>
                                 </ul>
                             </div>
 
@@ -49,4 +51,5 @@
             </div>
         </div>
     </section>
+    <script src="{{ asset('assetClient/js/ajax.js') }}"></script>
 @endsection

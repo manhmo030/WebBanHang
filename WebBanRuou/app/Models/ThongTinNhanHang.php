@@ -27,7 +27,6 @@ class ThongTinNhanHang extends Model
     public function thongtinnhanhangByUserId($makhachhang)
     {
         $ttnh = ThongTinNhanHang::where('makhachhang', $makhachhang)
-            //->where('trangthai', 'default')
             ->join('tbl_xaphuongthitran', 'tbl_xaphuongthitran.xaid', '=', 'tbl_thongtinnhanhang.xaid')
             ->join('tbl_quanhuyen', 'tbl_quanhuyen.maqh', '=', 'tbl_xaphuongthitran.maqh')
             ->join('tbl_tinhthanhpho', 'tbl_tinhthanhpho.matp', '=', 'tbl_quanhuyen.matp')

@@ -4,6 +4,7 @@ use App\Http\Controllers\Admim\AdminController;
 use App\Http\Controllers\Admim\AdminCouponController;
 use App\Http\Controllers\Admim\AdminFeeShipController;
 use App\Http\Controllers\Admim\AdminOrderController;
+use App\Http\Controllers\Admim\PDFController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\FacebookController;
 use App\Http\Controllers\Auth\GoogleController;
@@ -32,6 +33,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/show-dash-board', [AdminController::class, 'showDashBoard']);
     Route::get('/register', [AuthController::class, 'showFormRegister']);
     Route::post('/register', [AuthController::class, 'register']);
+    //products
     Route::get('/add-product', [AdminController::class, 'showFormAddProduct']);
     Route::post('/add-product', [AdminController::class, 'addProduct']);
     Route::get('/update-product/{masp}', [AdminController::class, 'showFormUpdateProduct'])->name('update-product');
@@ -40,10 +42,13 @@ Route::prefix('admin')->group(function () {
     Route::delete('/delete-product-ajax/{masp}', [AuthController::class, 'deleteProductAjax']);
     Route::delete('/delete-multiple-products', [AdminController::class, 'deleteMultipleProducts'])->name('delete-multiple-products');
     Route::post('/search-keyword', [AdminController::class, 'searchKeyword']);
+    Route::get('/export-products-excel', [AdminController::class, 'exportProductsExcel']);
+    Route::post('/import-products-excel', [AdminController::class, 'importProductsExcel']);
     //order
     Route::get('/order', [AdminOrderController::class, 'showFormOrder']);
     Route::post('/order/{madonhang}', [AdminOrderController::class, 'updateOrder']);
     Route::get('/orderDetail/{madonhang}', [AdminOrderController::class, 'showFormOrderDetail']);
+    Route::get('/export-order-pdf/{madonhang}', [PDFController::class, 'exportOrder']);
     //coupon
     Route::get('/coupon', [AdminCouponController::class, 'showCoupon']);
     Route::get('/add-coupon', [AdminCouponController::class, 'showFormAddCoupon']);

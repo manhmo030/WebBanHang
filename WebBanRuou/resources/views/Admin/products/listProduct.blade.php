@@ -2,7 +2,7 @@
 @section('admin_content')
     <div class="container-fluid pt-4 px-4">
         <div class="bg-light text-center rounded p-4">
-            <div class="d-flex align-items-center justify-content-between mb-4">
+            <div class="d-flex align-items-center justify-content-between">
                 <h6 class="mb-0">Danh Sách Sản Phẩm 🌻 </h6>
                 <div class="d-flex align-items-center justify-content-between mb-4">
                     <!-- TÌM KIẾM -->
@@ -15,15 +15,36 @@
                     </form>
 
                     <a class="btn btn-sm btn-primary" href="{{ URL::to('/admin/add-product') }}">Thêm Mới</a>
+
+
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <form action="{{ URL::to('/admin/import-products-excel') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <button type="submit" class="btn btn-sm btn-primary">Import Excel</button>
+                    <input type="file" name="fileImport" accept=".xlsx">
+                </form>
+
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                    <a class="btn btn-sm btn-primary" href="{{ URL::to('/admin/export-products-excel') }}">Export Excel</a>
                 </div>
 
             </div>
+            @if (session('error'))
+                <div class="alert alert-success">
+                    {{ session('error') }}
+                </div>
+            @endif
+
+
             <div class="table-responsive">
-                {{-- @if (session('success'))
+                @if (session('success'))
                     <div class="alert alert-success">
                         {{ session('success') }}
                     </div>
-                @endif --}}
+                @endif
                 <form action="{{ route('delete-multiple-products') }}" method="POST">
                     @csrf
                     @method('DELETE')
@@ -96,4 +117,3 @@
         </div>
     </div>
 @endsection
-

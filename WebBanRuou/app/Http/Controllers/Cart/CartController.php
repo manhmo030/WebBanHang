@@ -19,7 +19,6 @@ class CartController extends Controller
         $this->cart = $cart;
     }
 
-
     public function showFormCart()
     {
         if (auth()->check()) {
@@ -76,7 +75,7 @@ class CartController extends Controller
                 $ctgiohang = ChiTietGioHang::where('mactgiohang', $mactgiohang)->first();
                 $total = $ctgiohang->gia * $quantity;
                 ChiTietGioHang::where('mactgiohang', $mactgiohang)->update(['soluong' => $quantity, 'tongcong' => $total]);
-                $updatedCartItems[] = [
+                $updatedCartItems[] = [ //update tổng tiền từng sp
                     'mactgiohang' => $mactgiohang,
                     'total' => $total
                 ];

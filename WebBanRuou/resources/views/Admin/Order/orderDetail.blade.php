@@ -21,7 +21,8 @@
                                 <td>{{ $nhanHang->hoten }}</td>
                                 <td>{{ $nhanHang->email }}</td>
                                 <td>{{ $nhanHang->sdt }}</td>
-                                <td>{{ $nhanHang->tentinhthanhpho }} - {{ $nhanHang->tenquanhuyen }} - {{ $nhanHang->tenxaphuongthitran }}</td>
+                                <td>{{ $nhanHang->tentinhthanhpho }} - {{ $nhanHang->tenquanhuyen }} -
+                                    {{ $nhanHang->tenxaphuongthitran }}</td>
 
                             </tr>
                         </tbody>
@@ -51,6 +52,7 @@
                         </tbody>
                     </table>
                 </div>
+                <a style="margin-top: 10px; float: left;" class="btn btn-sm btn-primary" href="{{ URL::to('/admin/export-order-pdf/'.$ctDonHang[0]->madonhang) }}">In đơn hàng</a>
             </div>
 
         </div>

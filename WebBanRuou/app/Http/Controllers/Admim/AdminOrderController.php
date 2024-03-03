@@ -5,10 +5,8 @@ namespace App\Http\Controllers\Admim;
 use App\Http\Controllers\Controller;
 use App\Models\ChiTietDonHang;
 use App\Models\DonHang;
-use App\Models\NhanHang;
 use App\Models\ThongTinNhanHang;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redis;
 
 class AdminOrderController extends Controller
 {
@@ -42,4 +40,6 @@ class AdminOrderController extends Controller
         $nhanHang = $this->ttnh->thongtinnhanhangById($donhang->mattnh);
         return view('Admin.Order.orderDetail', compact('nhanHang', 'ctDonHang'));
     }
+
+
 }

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admim;
 
+use App\Exports\SanPhamExport;
 use App\Http\Controllers\Controller;
+use App\Imports\SanPhamImport;
 use App\Models\ChatLieu;
 use App\Models\ChiTietSanPham;
 use App\Models\LoaiSanPham;
@@ -10,6 +12,7 @@ use App\Models\Ncc;
 use App\Models\SanPham;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminController extends Controller
 {
@@ -113,5 +116,27 @@ class AdminController extends Controller
             ->orWhere('tensp', 'LIKE', '%' . $keyword . '%')
             ->get();
         return view('Admin.products.searchProduct', compact('products'));
+    }
+
+    public function exportProductsExcel()
+    {
+        return Excel::download(new SanPhamExport, 'products.xlsx');
+    }
+
+    public function importProductsExcel(Request $request)
+    {
+        if ($request->hasFile('fileImport')) {
+            $file = $request->file('fileImport'); //lấy tên file
+            $filePath = $file->getPathName(); //lấy đường dẫn tạm thời
+            try {
+                Excel::import(new SanPhamImport, $filePath);
+            } catch (\Exception $e) {
+                return back()->with('success', 'Dữ liệu trong file bị lỗi');
+            }
+
+            return back()->with('success', 'Dữ liệu đã được import thành công!');
+        } else {
+            return back()->with('error', 'Vui lòng chọn một tệp để import.');
+        }
     }
 }

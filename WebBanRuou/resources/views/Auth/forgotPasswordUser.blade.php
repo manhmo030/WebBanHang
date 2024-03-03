@@ -71,7 +71,7 @@
             @csrf
             <h2>Forgot Password</h2>
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+            <input type="text" id="email" name="email" required>
 
             @if ($errors->has('email'))
                 <div style="margin-bottom: 10px" class="alert alert-danger">

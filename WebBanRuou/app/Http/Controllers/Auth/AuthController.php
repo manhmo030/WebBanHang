@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
@@ -150,8 +151,8 @@ class AuthController extends Controller
         if ($user) {
             $token = Str::random(50);
             $tokenData = [
-                'email' => $request->email,
-                'token' => $token
+                'token' => $token,
+                'email' => $request->email
             ];
 
             if (PasswordResetTokens::create($tokenData)) {
@@ -177,14 +178,15 @@ class AuthController extends Controller
             'password' => 'required|min:3',
             'confirmpassword' => 'required|same:password'
         ]);
-        $tokenData = PasswordResetTokens::where('token', $token)->firstOrFail();
-        $user = $tokenData->user;
-
+        $tokenData = PasswordResetTokens::where('token', $token)->first();
+        $user = $tokenData->user;  // hàm ->user ở trong Model
+        //dd($user);
         $data = [
             'password' => bcrypt($request->password)
         ];
         $check = $user->update($data);
         PasswordResetTokens::destroy($tokenData->email);
+
         if ($check) {
             return redirect('/user/');
         }
